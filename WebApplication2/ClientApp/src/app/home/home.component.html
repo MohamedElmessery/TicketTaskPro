@@ -1,0 +1,81 @@
+
+<div class="container">
+
+  <form [formGroup]="TicForm" (ngSubmit)="this[EventValue]()">
+
+    <h3>Ticket Form</h3>
+    <div class="row">
+
+      <table class="table">
+        <tr>
+          <td>TicName</td>
+          <td>
+            <input type="hidden" formControlName="tic_Id">
+            <input type="text" formControlName="tic_Name">
+            <div *ngIf="submitted && TicForm.controls.tic_Name.errors" class="text-danger">
+              <div *ngIf="TicForm.controls.tic_Name.errors.required">Name is required</div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>creationdatetime </td>
+          <td>
+            <input type="datetime" formControlName="creationdatetime">
+            <div *ngIf="submitted && TicForm.controls.creationdatetime.errors" class="text-danger">
+              <div *ngIf="TicForm.controls.creationdatetime.errors.required">creationdatetime is required</div>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+
+
+        <tr>
+          <td>Laststatuschangesdatetime</td>
+          <td>
+            <input type="datetime" formControlName="laststatuschangesdatetime">
+            <div *ngIf="submitted && TicForm.controls.laststatuschangesdatetime.errors" class="text-danger">
+              <div *ngIf="TicForm.controls.laststatuschangesdatetime.errors.required">Laststatuschangesdatetime is required</div>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+
+          <td colspan="2">
+            <button type="submit" class="btn btn-primary">{{EventValue}}</button>
+          </td>
+        </tr>
+
+      </table>
+
+    </div>
+   
+  <div class="row">
+   <label>Search by Ticket Name:</label> <input type="text" [(ngModel)]="tic_Name" (input)="Search()"  formControlName="tic_Name" />
+    <table class="table table-striped">
+
+      <tr>
+        <td>TicketId</td>
+        <td>Ticket Name</td>
+
+        <td>Creationdatetime</td>
+        <td>Laststatuschangesdatetime</td>
+
+      </tr>
+
+      <tr *ngFor="let d of data">
+        <td>{{d.tic_Id}}</td>
+        <td>{{d.tic_Name}}</td>
+
+        <td>{{d.creationdatetime}}</td>
+        <td>{{d.laststatuschangesdatetime}}</td>
+        <td><a (click)="EditData(d)" class="btn btn-warning">Edit</a></td>
+        <td><a (click)="deleteData(d.tic_Id)" class="btn btn-danger">Delete</a></td>
+      </tr>
+    </table>
+  </div>
+  </form>
+
+</div>
